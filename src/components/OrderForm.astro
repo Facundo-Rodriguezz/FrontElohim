@@ -1,0 +1,67 @@
+---
+---
+<section id="pedidos" class="pedidos-section">
+  <h2 class="section-title">Realizar Pedido</h2>
+  <form class="pedido-form">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" required />
+    </div>
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" required />
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección de entrega</label>
+      <textarea id="direccion" name="direccion" rows="3" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="pedido">Detalle del pedido</label>
+      <textarea id="pedido" name="pedido" rows="4" required></textarea>
+    </div>
+    <button type="submit">Enviar Pedido</button>
+  </form>
+</section>
+
+<style>
+  .pedidos-section {
+    padding: 1rem;
+  }
+  .pedido-form {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--burgundy);
+    font-weight: 500;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--burgundy);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  button:active {
+    background: var(--burgundy-light);
+  }
+</style>

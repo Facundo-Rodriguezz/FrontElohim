@@ -1,0 +1,130 @@
+---
+import MobileMenu from '../components/MobileMenu.astro';
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Elohim Descartables - Productos descartables de calidad" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<div class="logo">Elohim Descartables</div>
+				<MobileMenu />
+				<ul>
+					<li><a href="/">Inicio</a></li>
+					<li><a href="#productos">Productos</a></li>
+					<li><a href="#empresa">Empresa</a></li>
+					<li><a href="#pedidos">Pedidos</a></li>
+				</ul>
+			</nav>
+		</header>
+		<slot />
+		<footer>
+			<p>&copy; 2024 Elohim Descartables. Todos los derechos reservados.</p>
+		</footer>
+	</body>
+</html>
+<style is:global>
+	:root {
+		--burgundy: #800020;
+		--burgundy-light: #a3324d;
+		--white: #ffffff;
+	}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	html {
+		font-family: system-ui, sans-serif;
+		scroll-behavior: smooth;
+	}
+	body {
+		background-color: var(--white);
+		color: #333;
+	}
+	header {
+		background-color: var(--burgundy);
+		padding: 1rem;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	nav {
+		max-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.logo {
+		color: var(--white);
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+	nav ul {
+		display: flex;
+		gap: 2rem;
+		list-style: none;
+	}
+	nav a {
+		color: var(--white);
+		text-decoration: none;
+		font-weight: 500;
+	}
+	nav a:hover {
+		color: #f0f0f0;
+	}
+	footer {
+		background-color: var(--burgundy);
+		color: var(--white);
+		text-align: center;
+		padding: 1rem;
+		margin-top: 2rem;
+	}
+	.section-title {
+		color: var(--burgundy);
+		text-align: center;
+		margin: 2rem 0;
+		font-size: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		nav ul {
+			display: none;
+			position: fixed;
+			top: 60px;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			background-color: var(--burgundy);
+			padding: 1rem;
+			gap: 1rem;
+			text-align: center;
+		}
+
+		nav ul.show {
+			display: flex;
+		}
+
+		.logo {
+			font-size: 1.2rem;
+		}
+
+		.section-title {
+			font-size: 1.5rem;
+		}
+	}
+</style>

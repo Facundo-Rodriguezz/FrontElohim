@@ -1,0 +1,60 @@
+---
+import ProductCard from './ProductCard.astro';
+
+const products = [
+  {
+    name: 'Vasos Descartables 180ml',
+    price: 1200,
+    description: 'Pack x100 vasos plásticos resistentes',
+    image: '/placeholder-vasos.svg'
+  },
+  {
+    name: 'Platos Descartables 18cm',
+    price: 1500,
+    description: 'Pack x50 platos blancos resistentes',
+    image: '/placeholder-platos.svg'
+  },
+  {
+    name: 'Cubiertos Descartables',
+    price: 800,
+    description: 'Pack x100 tenedores y cucharas',
+    image: '/placeholder-cubiertos.svg'
+  },
+  {
+    name: 'Bandejas Térmicas',
+    price: 2000,
+    description: 'Pack x50 bandejas con división',
+    image: '/placeholder-bandejas.svg'
+  },
+  {
+    name: 'Bolsas de Residuos',
+    price: 1800,
+    description: 'Pack x10 bolsas reforzadas 80x110',
+    image: '/placeholder-bolsas.svg'
+  },
+  {
+    name: 'Servilletas',
+    price: 500,
+    description: 'Pack x100 servilletas blancas',
+    image: '/placeholder-servilletas.svg'
+  }
+];
+---
+
+<section id="productos">
+  <h2 class="section-title">Nuestros Productos</h2>
+  <div class="products-grid">
+    {products.map(product => <ProductCard {...product} />)}
+  </div>
+</section>
+
+<style>
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
