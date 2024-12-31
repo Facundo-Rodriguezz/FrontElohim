@@ -1,5 +1,5 @@
 ---
-import MobileMenu from '../components/MobileMenu.astro';
+import MobileMenu from "../components/MobileMenu.astro";
 interface Props {
 	title: string;
 }
@@ -11,7 +11,10 @@ const { title } = Astro.props;
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Elohim Descartables - Productos descartables de calidad" />
+		<meta
+			name="description"
+			content="Elohim Descartables - Productos descartables de calidad"
+		/>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
@@ -27,12 +30,15 @@ const { title } = Astro.props;
 					<li><a href="#productos">Productos</a></li>
 					<li><a href="#empresa">Empresa</a></li>
 					<li><a href="#pedidos">Pedidos</a></li>
+					<li><a href="#contacto">Contacto</a></li>
 				</ul>
 			</nav>
 		</header>
 		<slot />
 		<footer>
-			<p>&copy; 2024 Elohim Descartables. Todos los derechos reservados.</p>
+			<p>
+				&copy; 2024 Elohim Descartables. Todos los derechos reservados.
+			</p>
 		</footer>
 	</body>
 </html>
@@ -127,4 +133,15 @@ const { title } = Astro.props;
 			font-size: 1.5rem;
 		}
 	}
+
+	.contacto-info img {
+		max-width: 100%; /* Para asegurarte de que no se pase del contenedor */
+	}
+
+	.contacto-info .contacto-bloque img {
+		width: 150px; /* Cambia este valor para ajustar el tamaño */
+		height: auto; /* Mantén las proporciones */
+	}
+
+	
 </style>

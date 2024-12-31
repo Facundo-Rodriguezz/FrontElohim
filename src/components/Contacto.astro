@@ -1,0 +1,140 @@
+---
+import MobileMenu from "../components/MobileMenu.astro";
+ 
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Página de Contacto Elohim Descartables" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Contacto - Elohim Descartables</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Elohim Descartables</div>
+        <MobileMenu /> <!-- Aquí se incluye el menú móvil -->
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#empresa">Empresa</a></li>
+          <li><a href="#pedidos">Pedidos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<section id="contacto" class="contacto-section">
+  <h2 class="section-title">Contacto</h2>
+  <div class="contacto-content">
+    <!-- Mapa -->
+    <div class="contacto-mapa">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2sar!4v1735614194739!5m2!1ses-419!2sar!6m8!1m7!1sMxerYg1X5OOJOYrgTx1gIQ!2m2!1d-31.40897925556087!2d-64.18145166705409!3f345.5128883026106!4f2.1857982877262288!5f0.7820865974627469"
+        width="100%"
+        height="300"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+      >
+      </iframe>
+    </div>
+
+    <div class="contacto-info">
+      <div class="contacto-bloque">
+        <h3>¡Conócenos!</h3>
+        <img 
+          src="/public/images/elohim.jpg" 
+          alt="Logo Elohim Descartables" 
+          class="logo-redondo" 
+        />
+      </div>
+
+      <div class="contacto-bloque">
+        <h3>¡Síguenos!</h3>
+        <div class="redes-sociales">
+          <!-- WhatsApp -->
+          <a href="https://wa.me/5493516996607?text=Hola,%20estoy%20interesado%20en%20los%20productos%20de%20Elohim%20Descartables." target="_blank">
+            <img src="/public/images/icons8-whatsapp.gif" alt="WhatsApp" />
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/descartableselohim/" target="_blank">
+            <img src="/public/images/icons8-instagram-94.png" alt="Instagram" />
+          </a>
+        </div>
+      </div>
+
+      <div class="contacto-bloque">
+        <h3>¡Encuéntranos!</h3>
+        <ul>
+          <li><strong>Teléfono:</strong> 0351 6996607</li>
+          <li><strong>Teléfono:</strong> 0351 6996607</li>
+          <li>
+            <strong>Dirección:</strong> Tablada 28, Barrio Centro (Córdoba Capital)
+          </li>
+          <li><strong>Email:</strong> ElohimDescartables.com</li>
+          <li>
+            <strong>Horario:</strong> Lunes a viernes de 8:00 a 17:00 y sábados de
+            8:00 a 13:30
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contacto-section {
+    padding: 1.5rem;
+    background: #f9f9f9;
+  }
+  .contacto-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .contacto-mapa {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .contacto-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .contacto-bloque {
+    text-align: center;
+  }
+  .logo-redondo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+  .redes-sociales {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .redes-sociales img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Opcional si quieres un estilo redondeado */
+}
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>

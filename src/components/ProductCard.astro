@@ -15,7 +15,8 @@ const { name, price, description, image } = Astro.props;
 		<h3>{name}</h3>
 		<p class="price">${price}</p>
 		<p class="description">{description}</p>
-		<button>Agregar al pedido</button>
+		<button>Agregar al pedido</button>&nbsp;&nbsp;
+		<button>Detalles del producto</button>
 	</div>
 </div>
 
@@ -24,7 +25,7 @@ const { name, price, description, image } = Astro.props;
 		background: white;
 		border-radius: 8px;
 		overflow: hidden;
-		box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 		transition: transform 0.3s ease;
 	}
 	.product-card:hover {
