@@ -25,18 +25,14 @@ const products = [
   {
     name: 'Bandejas para Microondas',
     description: 'Bandejas 102,103,105,107 para microondas',
-    image: '/images/bandejas micro.png',
-  },
-  {
-    name: 'Servilletas',
-    description: 'Servilletas de distinto tamaño y diseño',
-    image: '/images/servilletas.png',
+    image: '/images/bandejas para micro.png',
   },
   {
     name: 'Servilletas',
     description: 'Servilletas de distinto tamaño y diseño',
     image: '/images/servilletas.png',
   }
+
 ];
 ---
 
@@ -56,4 +52,9 @@ const products = [
     max-width: 1200px;
     margin: 0 auto;
   }
+  @media (max-width: 768px) {
+        .products-grid {
+            grid-template-columns: 1fr; /* Una columna en móviles */
+        }
+    }
 </style>

@@ -1,212 +1,200 @@
 ---
 import MobileMenu from "../components/MobileMenu.astro";
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
 
 // Categorías de productos
 const productCategories = [
-	"Vasos Termicos",
-	"Bolsas camisetas",
-	"Cubiertos Descartables",
-	"Cajas de Rotiserias",
-	"Bandejas para Microondas",
-	"Servilletas",
+    "Vasos Termicos",
+    "Bolsas camisetas",
+    "Cubiertos Descartables",
+    "Cajas de Rotiserias",
+    "Bandejas para Microondas",
+    "Servilletas",
 ];
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="Elohim Descartables - Productos descartables de calidad"
-		/>
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<header>
-			<nav>
-				<div class="logo">Elohim Descartables</div>
-				<MobileMenu />
-				<ul>
-					<li><a href="/">Inicio</a></li>
-					<li
-						class="productos-menu"
-						onmouseover="showCategories()"
-						onmouseout="hideCategories()"
-					>
-						<a href="#productos">Productos</a>
-						<ul class="categories-menu">
-							{
-								productCategories.map((category) => (
-									<li>
-										<a href={`#${category}`}>{category}</a>
-									</li>
-								))
-							}
-						</ul>
-					</li>
-					<li><a href="#empresa">Empresa</a></li>
-					<li><a href="#pedidos">Pedidos</a></li>
-					<li><a href="#contacto">Contacto</a></li>
-				</ul>
-			</nav>
-		</header>
-		<slot />
-		<footer>
-			<p>
-				&copy; 2024 Elohim Descartables. Todos los derechos reservados.
-			</p>
-		</footer>
-	</body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Elohim Descartables - Productos descartables de calidad" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Elohim Descartables</div>
+            <MobileMenu />
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li class="productos-menu" onmouseover="showCategories()" onmouseout="hideCategories()">
+                    <a href="#productos">Productos</a>
+                    <ul class="categories-menu">
+                        {
+                            productCategories.map((category) => (
+                                <li>
+                                    <a href={`#${category}`}>{category}</a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </li>
+                <li><a href="#empresa">Empresa</a></li>
+                <li><a href="#pedidos">Pedidos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <slot />
+    <footer>
+        <p>&copy; 2024 Elohim Descartables. Todos los derechos reservados.</p>
+    </footer>
+</body>
 </html>
 
 <style is:global>
-	:root {
-		--burgundy: #800020;
-		--burgundy-light: #a3324d; /* Color más claro */
-		--white: #ffffff;
-	}
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		scroll-behavior: smooth;
-	}
-	body {
-		background-color: var(--white);
-		color: #333;
-	}
-	header {
-		background-color: var(--burgundy);
-		padding: 1rem;
-		position: sticky;
-		top: 0;
-		z-index: 100;
-	}
-	nav {
-		max-width: 1200px;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-	.logo {
-		color: var(--white);
-		font-size: 1.5rem;
-		font-weight: bold;
-	}
-	nav ul {
-		display: flex;
-		gap: 2rem;
-		list-style: none;
-		position: relative; /* Para posicionar el menú de categorías */
-	}
-	nav a {
-		color: var(--white);
-		text-decoration: none;
-		font-weight: 500;
-	}
-	nav a:hover {
-		color: #f0f0f0;
-	}
-	.categories-menu {
-		display: none; /* Oculto por defecto */
-		position: absolute;
-		background-color: #a3324d; /* Color más claro */
-		padding: 1.5rem; /* Aumentar el padding */
-		list-style: none;
-		z-index: 200;
-		border-radius: 5px;
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Agregar sombra para dar profundidad */
-	}
-	.categories-menu li {
-		margin: 0.5rem 0; /* Espaciado entre elementos */
-	}
-	.categories-menu a {
-		font-size: 1.1rem; /* Aumentar el tamaño de la fuente */
-		color: var(--white); /* Asegurarse de que el texto sea visible */
-	}
-	.productos-menu:hover .categories-menu {
-		display: block; /* Muestra al pasar el mouse */
-	}
-	footer {
-		background-color: var(--burgundy);
-		color: var(--white);
-		text-align: center;
-		padding: 1rem;
-		margin-top: 2rem;
-	}
-	.section-title {
-		color: var(--burgundy);
-		text-align: center;
-		margin: 2rem 0;
-		font-size: 2rem;
-	}
+    :root {
+        --burgundy: #800020;
+        --burgundy-light: #a3324d;
+        --white: #ffffff;
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html {
+        font-family: system-ui, sans-serif;
+        scroll-behavior: smooth;
+    }
+    body {
+        background-color: var(--white);
+        color: #333;
+    }
+    header {
+        background-color: var(--burgundy);
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    nav {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* Permite que el contenido se ajuste */
+    }
+    .logo {
+        color: var(--white);
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    nav ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        position: relative;
+    }
+    nav a {
+        color: var(--white);
+        text-decoration: none;
+        font-weight: 500;
+    }
+    nav a:hover {
+        color: #f0f0f0;
+    }
+    .categories-menu {
+        display: none;
+        position: absolute;
+        background-color: #a3324d;
+        padding: 1.5rem;
+        list-style: none;
+        z-index: 200;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .categories-menu li {
+        margin: 0.5rem 0;
+    }
+    .categories-menu a {
+        font-size: 1.1rem;
+        color: var(--white);
+    }
+    .productos-menu:hover .categories-menu {
+        display: block;
+    }
+    footer {
+        background-color: var(--burgundy);
+        color: var(--white);
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+    }
+    .section-title {
+        color: var(--burgundy);
+        text-align: center;
+        margin: 2rem 0;
+        font-size: 2rem;
+    }
 
-	@media (max-width: 768px) {
-		nav ul {
-			display: none;
-			position: fixed;
-			top: 60px;
-			left: 0;
-			right: 0;
-			flex-direction: column;
-			background-color: var(--burgundy);
-			padding: 1rem;
-			gap: 1rem;
-			text-align: center;
-		}
+    @media (max-width: 768px) {
+        nav ul {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            flex-direction: column;
+            background-color: var(--burgundy);
+            padding: 1rem;
+            gap: 1rem;
+            text-align: center;
+        }
 
-		nav ul.show {
-			display: flex;
-		}
+        nav ul.show {
+            display: flex;
+        }
 
-		.logo {
-			font-size: 1.2rem;
-		}
+        .logo {
+            font-size: 1.2rem;
+        }
 
-		.section-title {
-			font-size: 1.5rem;
-		}
-	}
+        .section-title {
+            font-size: 1.5rem;
+        }
+    }
 
-	.contacto-info img {
-		max-width: 100%; /* Para asegurarte de que no se pase del contenedor */
-	}
+    .contacto-info img {
+        max-width: 100%;
+    }
 
-	.contacto-info .contacto-bloque img {
-		width: 150px; /* Cambia este valor para ajustar el tamaño */
-		height: auto; /* Mantén las proporciones */
-	}
+    .contacto-info .contacto-bloque img {
+        width: 150px;
+        height: auto;
+    }
 </style>
 
 <script>
-	function showCategories() {
-		const categoriesMenu = document.querySelector(
-			".categories-menu",
-		) as HTMLElement;
-		if (categoriesMenu) {
-			categoriesMenu.style.display = "block";
-		}
-	}
+    function showCategories() {
+        const categoriesMenu = document.querySelector(".categories-menu") as HTMLElement;
+        if (categoriesMenu) {
+            categoriesMenu.style.display = "block";
+        }
+    }
 
-	function hideCategories() {
-		const categoriesMenu = document.querySelector(
-			".categories-menu",
-		) as HTMLElement;
-		if (categoriesMenu) {
-			categoriesMenu.style.display = "none";
-		}
-	}
+    function hideCategories() {
+        const categoriesMenu = document.querySelector(".categories-menu") as HTMLElement;
+        if (categoriesMenu) {
+            categoriesMenu.style.display = "none";
+        }
+    }
 </script>

@@ -62,4 +62,9 @@ const { name, description, image } = Astro.props;
 	button:hover {
 		background-color: var(--burgundy-light);
 	}
+	@media (max-width: 768px) {
+        .product-card {
+            width: 100%; /* Asegurarse de que el card ocupe el 100% */
+        }
+    }
 </style>

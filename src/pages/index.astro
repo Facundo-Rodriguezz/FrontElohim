@@ -8,13 +8,23 @@ import Contacto from '../components/Contacto.astro';
 ---
 
 <Layout title="Elohim Descartables">
-  <main>
-    <Hero />
-    <ProductsSection />
-    <CompanySection />
-    <OrderForm />
-    <Contacto />
-  </main>
+    <main>
+        <Hero />
+        <ProductsSection />
+        <CompanySection />
+        <OrderForm />
+        <Contacto />
+    </main>
 </Layout>
 
 <style>
+    main {
+        padding: 1rem; /* Agregar padding para mejorar el espaciado */
+    }
+
+    @media (max-width: 768px) {
+        main {
+            padding: 0.5rem; /* Reducir padding en móviles */
+        }
+    }
+</style>
