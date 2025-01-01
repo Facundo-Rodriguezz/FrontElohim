@@ -1,21 +1,18 @@
 ---
 interface Props {
 	name: string;
-	price: number;
 	description: string;
 	image: string;
 }
 
-const { name, price, description, image } = Astro.props;
+const { name, description, image } = Astro.props;
 ---
 
 <div class="product-card">
 	<img src={image} alt={name} />
 	<div class="product-info">
 		<h3>{name}</h3>
-		<p class="price">${price}</p>
 		<p class="description">{description}</p>
-		<button>Agregar al pedido</button>&nbsp;&nbsp;
 		<button>Detalles del producto</button>
 	</div>
 </div>

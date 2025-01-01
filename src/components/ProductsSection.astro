@@ -3,46 +3,40 @@ import ProductCard from './ProductCard.astro';
 
 const products = [
   {
-    name: 'Vasos Descartables 180ml',
-    price: 1200,
-    description: 'Pack x100 vasos plásticos resistentes',
-    image: '/placeholder-vasos.svg'
+    name: 'Vasos Termicos',
+    description: 'Pack x25 vasos termicos de distintas medidas',
+    image: '/images/vasos termicos.png',
   },
   {
-    name: 'Platos Descartables 18cm',
-    price: 1500,
-    description: 'Pack x50 platos blancos resistentes',
-    image: '/placeholder-platos.svg'
+    name: 'Bolsas camisetas',
+    description: 'Bolsas camisetas, arranque, polipropileno y de baja densidad ',
+    image: '/public/images/camiseta.png',
   },
   {
     name: 'Cubiertos Descartables',
-    price: 800,
-    description: 'Pack x100 tenedores y cucharas',
-    image: '/placeholder-cubiertos.svg'
+    description: 'Tenedores, cucharas, cuchillos y mas',
+    image: '/images/cubiertos.png',
   },
   {
-    name: 'Bandejas Térmicas',
-    price: 2000,
-    description: 'Pack x50 bandejas con división',
-    image: '/placeholder-bandejas.svg'
+    name: 'Cajas de Rotiserias',
+    description: 'Cajas de distinto tipo para rotiserias',
+    image: '/images/caja rotiseria.png',
   },
   {
-    name: 'Bolsas de Residuos',
-    price: 1800,
-    description: 'Pack x10 bolsas reforzadas 80x110',
-    image: '/placeholder-bolsas.svg'
+    name: 'Bandejas para Microondas',
+    description: 'Bandejas 102,103,105,107 para microondas',
+    image: '/images/bandejas micro.png',
   },
   {
     name: 'Servilletas',
-    price: 500,
-    description: 'Pack x100 servilletas blancas',
-    image: '/placeholder-servilletas.svg'
+    description: 'Servilletas de distinto tamaño y diseño',
+    image: '/public/images/servilletas.png',
   }
 ];
 ---
 
 <section id="productos">
-  <h2 class="section-title">Nuestros Productos</h2>
+  <h2 class="section-title">ALGUNOS PRODUCTOS DESTACADOS</h2>
   <div class="products-grid">
     {products.map(product => <ProductCard {...product} />)}
   </div>

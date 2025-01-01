@@ -1,46 +1,86 @@
----
----
-<section id="empresa" class="empresa-section">
-  <h2 class="section-title">Nuestra Empresa</h2>
-  <div class="empresa-content">
-    <p>Elohim Descartables es líder en la distribución de productos descartables de alta calidad. Con mas de 4 años de experiencia en el mercado.</p>
-    <h3>Nuestros valores:</h3>
-    <ul>
-      <li>Calidad garantizada</li>
-      <li>Precios competitivos</li>
-      <li>Entrega rápida</li>
-      <li>Atención personalizada</li>
-    </ul>
+<section class="empresa-section">
+  <div class="empresa-container">
+    <div class="empresa-info">
+      <h2 class="section-title">Quiénes Somos</h2>
+      <p>Elohim Descartables es una empresa líder en la distribución de productos descartables de alta calidad. Con más de 4 años de experiencia en el mercado, nos hemos consolidado como un proveedor confiable y eficiente.</p>
+      <div class="empresa-features">
+        <div class="feature">
+          <i class="fas fa-check-circle"></i>
+          <h3>Calidad Garantizada</h3>
+          <p>Todos nuestros productos cumplen con los más altos estándares de calidad.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-tags"></i>
+          <h3>Precios Competitivos</h3>
+          <p>Ofrecemos precios justos y accesibles para nuestros clientes.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-truck"></i>
+          <h3>Entrega Rápida</h3>
+          <p>Nos aseguramos de que tus pedidos lleguen a tiempo a tu negocio.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-tie"></i>
+          <h3>Atención Personalizada</h3>
+          <p>Nuestro equipo está siempre disponible para atender tus necesidades.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
   .empresa-section {
-    padding: 1rem;
+    padding: 4rem 1rem;
+    background-color: var(--burgundy);
   }
-  .empresa-content {
-    background: #f9f9f9;
-    border-radius: 8px;
-    padding: 1rem;
+
+  .empresa-container {
+    max-width: 1200px;
     margin: 0 auto;
-    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
-  h3 {
-    color: var(--burgundy);
-    margin: 1rem 0;
+
+  .empresa-info {
+    flex: 1;
+    padding-right: 3rem;
+    color: #fff;
   }
-  ul {
-    list-style-type: none;
-    padding-left: 1rem;
+
+  h2.section-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
   }
-  li {
+
+  .empresa-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .feature {
+    display: flex;
+    align-items: center;
+  }
+
+  .feature i {
+    font-size: 2rem;
+    color: #fff;
+    margin-right: 1rem;
+  }
+
+  .feature h3 {
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    position: relative;
+    color: #ffffff;
   }
-  li::before {
-    content: "•";
-    color: var(--burgundy);
-    position: absolute;
-    left: -1rem;
+
+  .feature p {
+    font-size: 1rem;
+    color: #e6e6e6;
   }
 </style>

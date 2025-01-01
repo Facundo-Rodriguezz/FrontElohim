@@ -1,8 +1,3 @@
----
-import MobileMenu from "../components/MobileMenu.astro";
- 
----
-
 <section id="contacto" class="contacto-section">
   <h2 class="section-title">Contacto</h2>
   <div class="contacto-content">
@@ -11,8 +6,8 @@ import MobileMenu from "../components/MobileMenu.astro";
       <iframe
         src="https://www.google.com/maps/embed?pb=!3m2!1ses-419!2sar!4v1735614194739!5m2!1ses-419!2sar!6m8!1m7!1sMxerYg1X5OOJOYrgTx1gIQ!2m2!1d-31.40897925556087!2d-64.18145166705409!3f345.5128883026106!4f2.1857982877262288!5f0.7820865974627469"
         width="100%"
-        height="300"
-        style="border:0;"
+        height="400"
+        style="border:0; margin-top: -1cm;"
         allowfullscreen=""
         loading="lazy"
       >
@@ -28,9 +23,24 @@ import MobileMenu from "../components/MobileMenu.astro";
           class="logo-redondo" 
         />
       </div>
-    
+      
+      <div class="contacto-bloque" style="margin-top: 1rem;">
+        <h3 style="font-size: 1.2rem;">¡Encuéntranos!</h3>
+        <ul style="font-size: 1.1rem;">
+          <li><strong>Teléfono:</strong> 0351 6996607</li>
+          <li>
+            <strong>Dirección:</strong> Tablada 28, Barrio Centro (Córdoba Capital)
+          </li>
+          <li><strong>Email:</strong> ElohimDescartables.com</li>
+          <li>
+            <strong>Horario:</strong> Lunes a viernes de 8:00 a 17:00 y sábados de
+            8:00 a 13:30
+          </li>
+        </ul>
+      </div>
+
       <div class="contacto-bloque">
-        <h3>¡Síguenos!</h3>
+        <h3 style="font-size: 1.2rem;">¡Síguenos!</h3>
         <div class="redes-sociales">
           <!-- WhatsApp -->
           <a href="https://wa.me/5493516996607?text=Hola,%20estoy%20interesado%20en%20los%20productos%20de%20Elohim%20Descartables." target="_blank">
@@ -43,36 +53,18 @@ import MobileMenu from "../components/MobileMenu.astro";
         </div>
       </div>
     </div>
-    
-
-      <div class="contacto-bloque">
-        <h3>¡Encuéntranos!</h3>
-        <ul>
-          <li><strong>Teléfono:</strong> 0351 6996607</li>
-          <li><strong>Teléfono:</strong> 0351 6996607</li>
-          <li>
-            <strong>Dirección:</strong> Tablada 28, Barrio Centro (Córdoba Capital)
-          </li>
-          <li><strong>Email:</strong> ElohimDescartables.com</li>
-          <li>
-            <strong>Horario:</strong> Lunes a viernes de 8:00 a 17:00 y sábados de
-            8:00 a 13:30
-          </li>
-        </ul>
-      </div>
-    </div>
   </div>
 </section>
 
 <style>
   .contacto-section {
     padding: 1.5rem;
-    background: #f9f9f9;
+    background: var(--burgundy);
   }
   .contacto-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 3rem;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -83,11 +75,12 @@ import MobileMenu from "../components/MobileMenu.astro";
   }
   .contacto-info {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
   }
   .contacto-bloque {
     text-align: center;
+    color: #fff;
   }
   .logo-redondo {
     width: 100px;
@@ -103,10 +96,10 @@ import MobileMenu from "../components/MobileMenu.astro";
     margin-top: 1rem;
   }
   .redes-sociales img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%; /* Opcional si quieres un estilo redondeado */
-}
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Opcional si quieres un estilo redondeado */
+  }
   ul {
     list-style: none;
     padding: 0;
