@@ -83,10 +83,38 @@
     font-size: 1rem;
     color: #e6e6e6;
   }
+
   @media (max-width: 768px) {
-        .empresa-container {
-            flex-direction: column; /* Cambiar a columna en móviles */
-            align-items: center; /* Centrar contenido */
-        }
+    .empresa-container {
+      flex-direction: column; /* Cambiar a columna en móviles */
+      align-items: center; /* Centrar contenido */
+      text-align: center; /* Centrar texto */
     }
+
+    .empresa-info {
+      padding-right: 0; /* Eliminar padding en móviles */
+      padding-bottom: 2rem; /* Agregar espacio entre info y características */
+    }
+
+    h2.section-title {
+      font-size: 2.5rem; /* Reducir tamaño del título en móviles */
+    }
+
+    .empresa-features {
+      grid-template-columns: 1fr; /* Una columna en móviles */
+      grid-gap: 1.5rem; /* Espacio entre características */
+    }
+
+    .feature i {
+      font-size: 1.5rem; /* Reducir tamaño de iconos en móviles */
+    }
+
+    .feature h3 {
+      font-size: 1.3rem; /* Reducir tamaño de subtítulos en móviles */
+    }
+
+    .feature p {
+      font-size: 0.9rem; /* Reducir tamaño de texto en móviles */
+    }
+  }
 </style>
