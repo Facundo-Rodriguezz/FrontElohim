@@ -8,12 +8,7 @@ const { title } = Astro.props;
 
 // Categorías de productos
 const productCategories = [
-    "Vasos Termicos",
-    "Bolsas camisetas",
-    "Cubiertos Descartables",
-    "Cajas de Rotiserias",
-    "Bandejas para Microondas",
-    "Servilletas",
+    
 ];
 ---
 
@@ -44,6 +39,8 @@ const productCategories = [
                                 </li>
                             ))
                         }
+                        <!-- Enlace para descargar el Excel -->
+                        <li><a href="/public/images/Productos.xls" download="productos.xlsx">Descargar Excel de Productos</a></li>
                     </ul>
                 </li>
                 <li><a href="#empresa">Empresa</a></li>
