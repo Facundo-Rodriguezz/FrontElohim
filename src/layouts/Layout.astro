@@ -5,11 +5,6 @@ interface Props {
 }
 
 const { title } = Astro.props;
-
-// Categorías de productos
-const productCategories = [
-    
-];
 ---
 
 <!doctype html>
@@ -25,20 +20,16 @@ const productCategories = [
 <body>
     <header>
         <nav>
-            <div class="logo">Elohim Descartables</div>
+            <div class="logo">
+                <a href="/" style="color: inherit; text-decoration: none;">Elohim Descartables</a>
+            </div>
             <MobileMenu />
             <ul>
                 <li><a href="/">Inicio</a></li>
                 <li class="productos-menu" onmouseover="showCategories()" onmouseout="hideCategories()">
                     <a href="#productos">Productos</a>
                     <ul class="categories-menu">
-                        {
-                            productCategories.map((category) => (
-                                <li>
-                                    <a href={`#${category}`}>{category}</a>
-                                </li>
-                            ))
-                        }
+                        
                         <!-- Enlace para descargar el Excel -->
                         <li><a href="/images/Productos.xls" download="Productos.xls">Descargar Excel de Productos</a></li>
                     </ul>

@@ -53,6 +53,51 @@
   </form>
 </section>
 
+<script>
+  document.querySelector('.pedido-form')?.addEventListener('submit', function (event) {
+    event.preventDefault(); 
+
+    
+    const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
+    const telefono = (document.getElementById('telefono') as HTMLInputElement).value.trim();
+    const calle = (document.getElementById('calle') as HTMLInputElement).value.trim();
+    const numeracion = (document.getElementById('numeracion') as HTMLInputElement).value.trim();
+    const piso = (document.getElementById('piso') as HTMLInputElement).value.trim();
+    const departamento = (document.getElementById('departamento') as HTMLInputElement).value.trim();
+    const localidad = (document.getElementById('localidad') as HTMLInputElement).value.trim();
+    const provincia = (document.getElementById('provincia') as HTMLInputElement).value.trim();
+    const pedido = (document.getElementById('pedido') as HTMLTextAreaElement).value.trim();
+
+    
+    if (!pedido || pedido.length === 0) {
+      alert("Por favor, escribe el detalle del pedido antes de enviarlo.");
+      return;
+    }
+
+   
+    let mensaje = `¡Hola! Quiero realizar un pedido:\n\n`;
+    mensaje += `*Nombre:* ${nombre}\n`;
+    mensaje += `*Teléfono:* ${telefono}\n`;
+    mensaje += `*Dirección:* ${calle} ${numeracion}`;
+    if (piso) mensaje += `, Piso: ${piso}`;
+    if (departamento) mensaje += `, Dpto: ${departamento}`;
+    mensaje += `\n*Localidad:* ${localidad}\n`;
+    mensaje += `*Provincia:* ${provincia}\n`;
+    mensaje += `*Pedido:* ${pedido}\n`; 
+
+   
+    const numeroWhatsApp = '5493516996607'; 
+
+    
+    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+
+    
+    window.open(url, '_blank');
+  });
+</script>
+
+
+
 <style>
   /* Variables de colores */
   :root {
