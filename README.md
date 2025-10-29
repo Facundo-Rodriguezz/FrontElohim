@@ -57,8 +57,6 @@ npm run dev
 Abrí el navegador en:
 
 
-Copiar código
-http://localhost:3000
 🌍 En vivo [(despliegue)](https://elohimdescartabless.netlify.app/)
 🔗 Visitar versión en producción:
 https://elohimdescartabless.netlify.app/
