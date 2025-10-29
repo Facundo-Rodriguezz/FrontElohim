@@ -1,54 +1,70 @@
-# Astro Starter Kit: Basics
+🌐 Elohim Descartables
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio web de **Elohim Descartables**, dedicado a la venta online de productos descartables (plásticos, servilletas, vasos, etc.).  
+Este proyecto consiste en una página web completa con catálogo de productos, sección de contacto y diseño responsivo.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Tecnologías utilizadas
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- **Astro / React / Vue / Svelte** (depende de tu stack) — frontend  
+- **HTML5 / CSS3 / JavaScript / TypeScript**  
+- **CSS Framework / Tailwind / Bootstrap / Styled Components**  
+- **Netlify** — hospedaje y despliegue  
+- **Git & GitHub** — control de versiones  
+- (Opcional) **API / CMS / Headless / Firebase** — si manejás productos dinámicos  
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🧩 Funcionalidades esperadas
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- Catálogo de productos con imágenes, descripciones y precios  
+- Filtros / categorías para productos  
+- Página de detalle de producto  
+- Carrito de compras / sistema de pedido (si aplica)  
+- Sección “Sobre nosotros” / “Quiénes somos”  
+- Sección de contacto con formulario o datos de localización  
+- Diseño responsive para móvil, tablet y escritorio  
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+---
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🖼️ Vista previa
 
-Any static assets, like images, can be placed in the `public/` directory.
+<img width="1900" height="935" alt="Captura de pantalla 2025-10-29 001749" src="https://github.com/user-attachments/assets/c72f9e2c-4535-4f05-bb66-47d5587c19ec" />
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## ⚙️ Cómo clonar y ejecutar localmente
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+1. Cloná este repositorio:
 
-## 👀 Want to learn more?
+git clone https://github.com/Facundo-Rodriguezz/elohim-descartables.git
+Entrá al directorio del proyecto:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+Copiar código
+cd elohim-descartables
+Instalá las dependencias:
+
+
+Copiar código
+npm install
+Iniciá el servidor de desarrollo:
+
+
+Copiar código
+npm run dev
+Abrí el navegador en:
+
+
+Copiar código
+http://localhost:3000
+🌍 En vivo [(despliegue)](https://elohimdescartabless.netlify.app/)
+🔗 Visitar versión en producción:
+https://elohimdescartabless.netlify.app/
+
+
+
+👥 Sobre Elohim Descartables
+Elohim Descartables se especializa en la venta de insumos descartables para eventos, comidas rápidas y uso diario. Nuestro objetivo es ofrecer productos de calidad, buen precio y envío confiable.
+
