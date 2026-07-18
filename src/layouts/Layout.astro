@@ -1,188 +1,240 @@
 ---
-import MobileMenu from "../components/MobileMenu.astro";
+import '../styles/global.css';
+import { getSiteConfig, getCategories } from '../lib/queries';
+import type { SiteConfig, Category } from '../lib/supabase';
+import { orgJsonLd } from '../lib/seo';
+
 interface Props {
-    title: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  canonical?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title = 'Elohim Descartables',
+  description = 'Productos descartables al por mayor y menor de alta calidad para tu negocio. Vasos, bolsas, cubiertos, servilletas, bandejas y más. Envíos a Córdoba Capital.',
+  image,
+  noindex = false,
+  canonical,
+} = Astro.props;
+
+const config: SiteConfig | null = await getSiteConfig();
+const categories: Category[] = await getCategories();
+const siteName = config?.company_name ?? 'Elohim Descartables';
+const fullTitle = title === siteName ? `${siteName} | Descartables al por mayor y menor` : `${title} | ${siteName}`;
+const origin = Astro.site?.origin ?? 'https://elohimdescartabless.netlify.app';
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, origin).toString();
+const ogImage = image ?? config?.hero_image_url ?? '/images/bandejas-termicas.jpg';
+const orgLd = orgJsonLd({
+  name: siteName,
+  url: origin,
+  logo: config?.logo_url ?? undefined,
+  phone: config?.phone ?? undefined,
+  address: config?.address ?? undefined,
+});
+
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/catalogo', label: 'Catálogo' },
+  { href: '/#categorias', label: 'Categorías' },
+  { href: '/#empresa', label: 'Empresa' },
+  { href: '/#pedidos', label: 'Pedidos' },
+  { href: '/#contacto', label: 'Contacto' },
+];
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Elohim Descartables - Productos descartables de calidad" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={new URL(ogImage, origin).toString()} />
+  <meta property="og:locale" content="es_AR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(ogImage, origin).toString()} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Theme (no flash) -->
+  <script is:inline src="/scripts/theme-init.js"></script>
+
+  <!-- Structured data -->
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...orgLd })} />
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="/" style="color: inherit; text-decoration: none;">Elohim Descartables</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:rounded-lg focus:bg-brand-700 focus:px-4 focus:py-2 focus:text-white">
+    Saltar al contenido
+  </a>
+
+  <!-- Top bar -->
+  <div class="bg-ink-900 text-ink-100 text-xs">
+    <div class="container-page flex h-9 items-center justify-between">
+      <p class="hidden sm:block">
+        {config?.free_shipping_threshold
+          ? `Envío gratis en pedidos mayores a ${config.free_shipping_threshold}`
+          : 'Envíos a todo Córdoba Capital y alrededores'}
+      </p>
+      <div class="flex items-center gap-3">
+        {config?.phone && <a href={`tel:${config.phone.replace(/\s/g, '')}`} class="hover:text-white">{config.phone}</a>}
+        {config?.hours && <span class="hidden md:inline text-ink-300">| {config.hours}</span>}
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-ink-200 bg-white/90 backdrop-blur dark:border-ink-800 dark:bg-ink-950/85">
+    <div class="container-page flex h-16 items-center gap-4">
+      <a href="/" class="flex items-center gap-2 font-display text-lg font-bold text-brand-700 dark:text-white">
+        {config?.logo_url
+          ? <img src={config.logo_url} alt={siteName} class="h-9 w-9 rounded-lg object-cover" />
+          : <span class="grid h-9 w-9 place-items-center rounded-lg bg-brand-700 text-white text-sm font-bold">ED</span>}
+        <span class="hidden sm:inline">{siteName}</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-1 ml-4" aria-label="Principal">
+        {navLinks.map((l) => (
+          <a href={l.href} class="rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 hover:text-brand-700 dark:text-ink-200 dark:hover:bg-ink-800 dark:hover:text-white">
+            {l.label}
+          </a>
+        ))}
+        <div class="group relative">
+          <button class="rounded-md px-3 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100 hover:text-brand-700 dark:text-ink-200 dark:hover:bg-ink-800 inline-flex items-center gap-1" aria-haspopup="true">
+            Categorías
+            <svg class="h-4 w-4 transition group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor"><path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.06l3.71-3.83a.75.75 0 1 1 1.08 1.04l-4.25 4.39a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z"/></svg>
+          </button>
+          <div class="invisible absolute left-0 top-full z-50 w-64 origin-top-left pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+            <div class="card p-2">
+              {categories.map((c) => (
+                <a href={`/catalogo?cat=${c.slug}`} class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-ink-700 hover:bg-brand-50 hover:text-brand-700 dark:text-ink-200 dark:hover:bg-ink-800">
+                  <span class="h-1.5 w-1.5 rounded-full bg-brand-500"></span>
+                  {c.name}
+                </a>
+              ))}
             </div>
-            <MobileMenu />
-            <ul>
-                <li><a href="/">Inicio</a></li>
-                <li class="productos-menu" onmouseover="showCategories()" onmouseout="hideCategories()">
-                    <a href="#productos">Productos</a>
-                    <ul class="categories-menu">
-                        
-                        <!-- Enlace para descargar el Excel -->
-                        <li><a href="/images/Productos.xls" download="Productos.xls">Descargar Excel de Productos</a></li>
-                    </ul>
-                </li>
-                <li><a href="#empresa">Empresa</a></li>
-                <li><a href="#pedidos">Pedidos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+          </div>
+        </div>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2">
+        <a href="/catalogo" class="hidden sm:inline-flex btn-outline !px-3 !py-2">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.3-4.3M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/></svg>
+          <span class="hidden lg:inline">Buscar</span>
+        </a>
+        {config?.whatsapp && (
+          <a href={`https://wa.me/${config.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener" class="btn-primary !px-3 !py-2">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.207zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span class="hidden sm:inline">Pedir</span>
+          </a>
+        )}
+        <button id="theme-toggle" aria-label="Cambiar tema" class="btn-ghost !px-2.5 !py-2">
+          <svg class="h-5 w-5 hidden dark:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg class="h-5 w-5 block dark:hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+        <button id="mobile-menu-btn" aria-label="Abrir menú" class="md:hidden btn-ghost !px-2.5 !py-2">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-ink-200 bg-white dark:border-ink-800 dark:bg-ink-950">
+      <div class="container-page py-3 space-y-1">
+        {navLinks.map((l) => (
+          <a href={l.href} class="block rounded-md px-3 py-2 text-base font-medium text-ink-800 hover:bg-ink-100 dark:text-ink-100 dark:hover:bg-ink-800">{l.label}</a>
+        ))}
+        <div class="pt-2 mt-2 border-t border-ink-200 dark:border-ink-800">
+          <p class="px-3 text-xs uppercase tracking-wide text-ink-500 mb-1">Categorías</p>
+          {categories.map((c) => (
+            <a href={`/catalogo?cat=${c.slug}`} class="block rounded-md px-3 py-2 text-sm text-ink-700 hover:bg-brand-50 hover:text-brand-700 dark:text-ink-200 dark:hover:bg-ink-800">{c.name}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
     <slot />
-    <footer>
-        <p>&copy; 2024 Elohim Descartables. Todos los derechos reservados.</p>
-    </footer>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 bg-ink-900 text-ink-300">
+    <div class="container-page py-12 grid gap-10 md:grid-cols-4">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 font-display text-xl font-bold text-white">
+          {config?.logo_url
+            ? <img src={config.logo_url} alt={siteName} class="h-10 w-10 rounded-lg object-cover" />
+            : <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-700 text-white text-sm font-bold">ED</span>}
+          {siteName}
+        </div>
+        <p class="mt-4 max-w-md text-sm leading-relaxed">
+          {config?.footer_text ?? 'Especialistas en insumos descartables para eventos, comidas rápidas y uso diario. Productos de calidad, buen precio y envío confiable.'}
+        </p>
+        {config?.instagram && (
+          <a href={`https://instagram.com/${config.instagram.replace('@', '')}`} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-sm hover:text-white">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            @{config.instagram.replace('@', '')}
+          </a>
+        )}
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Navegación</h3>
+        <ul class="space-y-2 text-sm">
+          {navLinks.map((l) => <li><a href={l.href} class="hover:text-white">{l.label}</a></li>)}
+          <li><a href="/catalogo" class="hover:text-white">Catálogo completo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-white font-semibold mb-3">Contacto</h3>
+        <ul class="space-y-2 text-sm">
+          {config?.phone && <li><a href={`tel:${config.phone.replace(/\s/g, '')}`} class="hover:text-white">{config.phone}</a></li>}
+          {config?.email && <li><a href={`mailto:${config.email}`} class="hover:text-white">{config.email}</a></li>}
+          {config?.address && <li>{config.address}</li>}
+          {config?.hours && <li class="text-ink-400">{config.hours}</li>}
+        </ul>
+        <a href="/admin" class="mt-4 inline-block text-xs text-ink-500 hover:text-ink-300">Panel de administración</a>
+      </div>
+    </div>
+    <div class="border-t border-ink-800">
+      <div class="container-page py-4 text-xs text-ink-500 flex flex-col sm:flex-row justify-between gap-2">
+        <p>&copy; {new Date().getFullYear()} {siteName}. Todos los derechos reservados.</p>
+        <p>Hecho con Astro + Supabase + Tailwind</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    toggle?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch {}
+    });
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn?.addEventListener('click', () => mobileMenu?.classList.toggle('hidden'));
+  </script>
 </body>
 </html>
-
-<style is:global>
-    :root {
-        --burgundy: #800020;
-        --burgundy-light: #a3324d;
-        --white: #ffffff;
-    }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    html {
-        font-family: system-ui, sans-serif;
-        scroll-behavior: smooth;
-    }
-    body {
-        background-color: var(--white);
-        color: #333;
-    }
-    header {
-        background-color: var(--burgundy);
-        padding: 1rem;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-    nav {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap; /* Permite que el contenido se ajuste */
-    }
-    .logo {
-        color: var(--white);
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    nav ul {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-        position: relative;
-    }
-    nav a {
-        color: var(--white);
-        text-decoration: none;
-        font-weight: 500;
-    }
-    nav a:hover {
-        color: #f0f0f0;
-    }
-    .categories-menu {
-        display: none;
-        position: absolute;
-        background-color: #a3324d;
-        padding: 1.5rem;
-        list-style: none;
-        z-index: 200;
-        border-radius: 5px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    .categories-menu li {
-        margin: 0.5rem 0;
-    }
-    .categories-menu a {
-        font-size: 1.1rem;
-        color: var(--white);
-    }
-    .productos-menu:hover .categories-menu {
-        display: block;
-    }
-    footer {
-        background-color: var(--burgundy);
-        color: var(--white);
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-    }
-    .section-title {
-        color: var(--burgundy);
-        text-align: center;
-        margin: 2rem 0;
-        font-size: 2rem;
-    }
-
-    @media (max-width: 768px) {
-        nav ul {
-            display: none;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            right: 0;
-            flex-direction: column;
-            background-color: var(--burgundy);
-            padding: 1rem;
-            gap: 1rem;
-            text-align: center;
-        }
-
-        nav ul.show {
-            display: flex;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-        }
-    }
-
-    .contacto-info img {
-        max-width: 100%;
-    }
-
-    .contacto-info .contacto-bloque img {
-        width: 150px;
-        height: auto;
-    }
-</style>
-
-<script>
-    function showCategories() {
-        const categoriesMenu = document.querySelector(".categories-menu") as HTMLElement;
-        if (categoriesMenu) {
-            categoriesMenu.style.display = "block";
-        }
-    }
-
-    function hideCategories() {
-        const categoriesMenu = document.querySelector(".categories-menu") as HTMLElement;
-        if (categoriesMenu) {
-            categoriesMenu.style.display = "none";
-        }
-    }
-</script>

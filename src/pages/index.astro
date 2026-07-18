@@ -1,30 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import ProductsSection from '../components/ProductsSection.astro';
-import CompanySection from '../components/CompanySection.astro';
+import HomeSections from '../components/HomeSections.astro';
 import OrderForm from '../components/OrderForm.astro';
-import Contacto from '../components/Contacto.astro';
 ---
 
-<Layout title="Elohim Descartables">
-    <main>
-        <Hero />
-        <ProductsSection />
-        <CompanySection />
-        <OrderForm />
-        <Contacto />
-    </main>
+<Layout>
+  <HomeSections />
+  <OrderForm />
 </Layout>
-
-<style>
-    main {
-        padding: 1rem; /* Agregar padding para mejorar el espaciado */
-    }
-
-    @media (max-width: 768px) {
-        main {
-            padding: 0.5rem; /* Reducir padding en móviles */
-        }
-    }
-</style>

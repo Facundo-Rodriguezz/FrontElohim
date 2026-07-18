@@ -1,221 +1,82 @@
-<section id="pedidos" class="pedidos-section">
-  <h2 class="section-title">Realizar Pedido</h2>
-  <form class="pedido-form">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required />
-      </div>
-      <div class="form-group">
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="telefono" placeholder="Escribe tu número de teléfono" required />
-      </div>
-    </div>
+---
+import { getSiteConfig } from '../lib/queries';
+const config = await getSiteConfig();
+const whatsapp = config?.whatsapp ?? '5493516996607';
+---
 
-    <div class="form-row">
-      <div class="form-group">
-        <label for="calle">Calle</label>
-        <input type="text" id="calle" name="calle" placeholder="Escribe el nombre de la calle" required />
-      </div>
-      <div class="form-group">
-        <label for="numeracion">Numeración</label>
-        <input type="number" id="numeracion" name="numeracion" placeholder="Escribe el número de la dirección" required />
-      </div>
+<section id="pedidos" class="bg-ink-100/60 dark:bg-ink-900/40 py-14">
+  <div class="container-page max-w-3xl">
+    <div class="text-center mb-8">
+      <h2 class="section-title">Realizar pedido</h2>
+      <p class="section-sub mt-1">Completá el formulario y lo enviamos por WhatsApp.</p>
     </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="piso">Piso (opcional)</label>
-        <input type="text" id="piso" name="piso" placeholder="Escribe el piso, si aplica" />
+    <form id="order-form" class="card p-6 sm:p-8 space-y-5">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="label" for="nombre">Nombre *</label>
+          <input class="input" id="nombre" name="nombre" required placeholder="Tu nombre completo" />
+        </div>
+        <div>
+          <label class="label" for="telefono">Teléfono *</label>
+          <input class="input" id="telefono" name="telefono" type="tel" required placeholder="Ej: 351 1234567" />
+        </div>
       </div>
-      <div class="form-group">
-        <label for="departamento">Departamento (opcional)</label>
-        <input type="text" id="departamento" name="departamento" placeholder="Escribe el departamento, si aplica" />
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label class="label" for="calle">Calle *</label>
+          <input class="input" id="calle" name="calle" required placeholder="Nombre de la calle" />
+        </div>
+        <div>
+          <label class="label" for="numeracion">Numeración *</label>
+          <input class="input" id="numeracion" name="numeracion" required placeholder="Número" />
+        </div>
       </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="localidad">Localidad</label>
-        <input type="text" id="localidad" name="localidad" placeholder="Escribe la localidad" required />
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div>
+          <label class="label" for="piso">Piso</label>
+          <input class="input" id="piso" name="piso" placeholder="Opcional" />
+        </div>
+        <div>
+          <label class="label" for="departamento">Departamento</label>
+          <input class="input" id="departamento" name="departamento" placeholder="Opcional" />
+        </div>
+        <div>
+          <label class="label" for="localidad">Localidad *</label>
+          <input class="input" id="localidad" name="localidad" required placeholder="Ej: Córdoba" />
+        </div>
       </div>
-      <div class="form-group">
-        <label for="provincia">Provincia</label>
-        <input type="text" id="provincia" name="provincia" placeholder="Escribe la provincia" required />
+      <div>
+        <label class="label" for="provincia">Provincia *</label>
+        <input class="input" id="provincia" name="provincia" required placeholder="Ej: Córdoba" />
       </div>
-    </div>
-
-    <div class="form-group">
-      <label for="pedido">Detalle del pedido</label>
-      <textarea id="pedido" name="pedido" rows="4" placeholder="Escribe el detalle del pedido (productos, cantidad, etc.)" required></textarea>
-    </div>
-    <button type="submit">Enviar Pedido</button>
-  </form>
+      <div>
+        <label class="label" for="pedido">Detalle del pedido *</label>
+        <textarea class="input" id="pedido" name="pedido" rows="4" required placeholder="Productos, cantidades, etc."></textarea>
+      </div>
+      <button type="submit" class="btn-primary w-full">
+        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l-.999 3.648 3.978-1.207z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+    </form>
+  </div>
 </section>
 
-<script>
-  document.querySelector('.pedido-form')?.addEventListener('submit', function (event) {
-    event.preventDefault(); 
-
-    
-    const nombre = (document.getElementById('nombre') as HTMLInputElement).value.trim();
-    const telefono = (document.getElementById('telefono') as HTMLInputElement).value.trim();
-    const calle = (document.getElementById('calle') as HTMLInputElement).value.trim();
-    const numeracion = (document.getElementById('numeracion') as HTMLInputElement).value.trim();
-    const piso = (document.getElementById('piso') as HTMLInputElement).value.trim();
-    const departamento = (document.getElementById('departamento') as HTMLInputElement).value.trim();
-    const localidad = (document.getElementById('localidad') as HTMLInputElement).value.trim();
-    const provincia = (document.getElementById('provincia') as HTMLInputElement).value.trim();
-    const pedido = (document.getElementById('pedido') as HTMLTextAreaElement).value.trim();
-
-    
-    if (!pedido || pedido.length === 0) {
-      alert("Por favor, escribe el detalle del pedido antes de enviarlo.");
-      return;
-    }
-
-   
-    let mensaje = `¡Hola! Quiero realizar un pedido:\n\n`;
-    mensaje += `*Nombre:* ${nombre}\n`;
-    mensaje += `*Teléfono:* ${telefono}\n`;
-    mensaje += `*Dirección:* ${calle} ${numeracion}`;
-    if (piso) mensaje += `, Piso: ${piso}`;
-    if (departamento) mensaje += `, Dpto: ${departamento}`;
-    mensaje += `\n*Localidad:* ${localidad}\n`;
-    mensaje += `*Provincia:* ${provincia}\n`;
-    mensaje += `*Pedido:* ${pedido}\n`; 
-
-   
-    const numeroWhatsApp = '5493516996607'; 
-
-    
-    const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-
-    
-    window.open(url, '_blank');
+<script is:inline define:vars={{ whatsapp }}>
+  const form = document.getElementById('order-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const get = (id) => (document.getElementById(id)?.value || '').trim();
+    const pedido = get('pedido');
+    if (!pedido) { alert('Escribí el detalle del pedido.'); return; }
+    let msg = '¡Hola! Quiero realizar un pedido:\n\n';
+    msg += `*Nombre:* ${get('nombre')}\n`;
+    msg += `*Teléfono:* ${get('telefono')}\n`;
+    msg += `*Dirección:* ${get('calle')} ${get('numeracion')}`;
+    if (get('piso')) msg += `, Piso: ${get('piso')}`;
+    if (get('departamento')) msg += `, Dpto: ${get('departamento')}`;
+    msg += `\n*Localidad:* ${get('localidad')}\n`;
+    msg += `*Provincia:* ${get('provincia')}\n`;
+    msg += `*Pedido:* ${pedido}\n`;
+    window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   });
 </script>
-
-
-
-<style>
-  /* Variables de colores */
-  :root {
-    --burgundy: #8A1E41;
-    --burgundy-light: #A83256;
-    --gray-light: #f9f9f9;
-    --gray-border: #ddd;
-    --text-color: #333;
-    --font-family: 'Poppins', sans-serif;
-  }
-
-  .pedidos-section {
-    padding: 2rem 1rem;
-    background-color: var(--gray-light);
-    text-align: center;
-  }
-
-  .section-title {
-    font-family: var(--font-family);
-    color: var(--burgundy);
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .pedido-form {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    margin: 0 auto;
-    max-width: 600px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  label {
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-    font-weight: bold;
-    font-size: 1rem;
-    font-family: var(--font-family);
-  }
-
-  input, textarea {
-    padding: 0.75rem;
-    border: 1px solid var(--gray-border);
-    border-radius: 8px;
-    font-size: 1rem;
-    font-family: var(--font-family);
-    color: var(--text-color);
-    background: #fff;
-    transition: border-color 0.3s ease;
-  }
-
-  input:focus, textarea:focus {
-    border-color: var(--burgundy);
-    outline: none;
-  }
-
-  textarea {
-    resize: none;
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
-    padding: 1rem;
-    background: var(--burgundy);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    font-family: var(--font-family);
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-
-  button:hover {
-    background: var(--burgundy-light);
-  }
-
-  button:active {
-    background: var(--burgundy-light);
-    transform: scale(0.98);
-  }
-
-  /* Responsividad */
-  @media (max-width: 768px) {
-        .pedido-form {
-            padding: 1rem; /* Reducir padding del formulario */
-        }
-
-        .form-row {
-            flex-direction: column; /* Cambiar a columna en móviles */
-        }
-    }
-
-    .pedido-form {
-      padding: 1.5rem;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-    }
-
-    input, textarea {
-      font-size: 0.9rem;
-    }
-  }
-</style>

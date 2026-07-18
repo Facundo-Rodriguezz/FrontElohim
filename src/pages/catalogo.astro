@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CatalogBrowser from '../components/CatalogBrowser.tsx';
+import { getAllProducts, getCategories, getBrands } from '../lib/queries';
+
+const [products, categories, brands] = await Promise.all([
+  getAllProducts(),
+  getCategories(),
+  getBrands(),
+]);
+
+const cat = Astro.url.searchParams.get('cat') ?? undefined;
+const q = Astro.url.searchParams.get('q') ?? undefined;
+---
+
+<Layout
+  title="Catálogo"
+  description="Explorá el catálogo completo de Elohim Descartables. Vasos, bolsas, cubiertos, bandejas, servilletas y más, al por mayor y menor."
+  canonical={new URL('/catalogo', Astro.site).toString()}
+>
+  <div class="container-page py-8 sm:py-12">
+    <header class="mb-8">
+      <nav class="text-sm text-ink-500 dark:text-ink-400 mb-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-brand-700">Inicio</a>
+        <span class="mx-1">/</span>
+        <span class="text-ink-700 dark:text-ink-200">Catálogo</span>
+      </nav>
+      <h1 class="font-display text-3xl font-bold text-ink-900 dark:text-white sm:text-4xl">Catálogo</h1>
+      <p class="mt-2 text-ink-500 dark:text-ink-400">Filtrá por categoría, marca u oferta y encontrá lo que necesitás.</p>
+    </header>
+
+    {products.length === 0 ? (
+      <div class="card p-12 text-center">
+        <p class="text-ink-500">Aún no hay productos cargados.</p>
+        <p class="text-sm text-ink-400 mt-2">Agregá productos desde el <a href="/admin" class="link">panel de administración</a>.</p>
+      </div>
+    ) : (
+      <CatalogBrowser client:load
+        products={products as any}
+        categories={categories as any}
+        brands={brands as any}
+        initialCategorySlug={cat}
+        initialSearch={q}
+      />
+    )}
+  </div>
+</Layout>
