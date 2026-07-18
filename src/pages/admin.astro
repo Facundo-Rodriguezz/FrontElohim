@@ -1,5 +1,29 @@
 ---
+import '../styles/global.css';
 import AdminApp from '../components/AdminApp.tsx';
+
+const siteName = 'Elohim Descartables';
 ---
 
-<AdminApp client:load />
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Panel de administración | {siteName}</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script is:inline src="/scripts/theme-init.js"></script>
+</head>
+<body>
+  <div id="admin-root">
+    <AdminApp client:load />
+  </div>
+</body>
+</html>
